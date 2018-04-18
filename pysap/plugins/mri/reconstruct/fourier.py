@@ -100,7 +100,7 @@ class FFT2(FourierBase):
         x: np.ndarray
             masked Fourier transform of the input image.
         """
-        return self._mask * pfft.fft2(img)
+        return self._mask * pfft.fft2(img) / np.sqrt(np.prod(self.shape))
 
     def adj_op(self, x):
         """ This method calculates inverse masked Fourier transform of a 2-D
@@ -116,7 +116,7 @@ class FFT2(FourierBase):
         img: np.ndarray
             inverse 2D discrete Fourier transform of the input coefficients.
         """
-        return pfft.ifft2(self._mask * x)
+        return pfft.ifft2(self._mask * x) * np.sqrt(np.prod(self.shape))
 
 
 class NFFT2(FourierBase):
