@@ -116,7 +116,7 @@ class FFT2(FourierBase):
         img: np.ndarray
             inverse 2D discrete Fourier transform of the input coefficients.
         """
-        return pfft.ifft2(self._mask * x) * np.sqrt(np.prod(self.shape))
+        return np.conj(pfft.ifft2(self._mask * x)*np.sqrt(np.prod(self.shape)))
 
 
 class NFFT2(FourierBase):
